@@ -1,0 +1,107 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdp8geafkd761"]
+
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_p2a6q"]
+[ext_resource type="PackedScene" uid="uid://ds6phr5velbfr" path="res://Scenes/cutscene.tscn" id="2_bcc75"]
+[ext_resource type="FontFile" uid="uid://dj81oroveny0l" path="res://Assets/Fonts/EquipmentPro.ttf" id="3_r6cyf"]
+[ext_resource type="AudioStream" uid="uid://ruau5oj3vhx0" path="res://Sounds/gta sound.mp3" id="4_0wpcn"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p2a6q")
+cutscene = ExtResource("2_bcc75")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 33.56
+offset_top = -156.61
+offset_right = 219.56
+offset_bottom = -28.61
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.881182, 0.609666, 0.166024, 1)
+theme_override_colors/font_hover_color = Color(0.882353, 0.607843, 0.164706, 1)
+theme_override_fonts/font = ExtResource("3_r6cyf")
+theme_override_font_sizes/font_size = 50
+text = "New Game"
+flat = true
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.882353, 0.607843, 0.164706, 1)
+theme_override_colors/font_hover_color = Color(0.882353, 0.607843, 0.164706, 1)
+theme_override_fonts/font = ExtResource("3_r6cyf")
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+flat = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -130.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.890088, 0, 0.0773994, 1)
+theme_override_fonts/font = ExtResource("3_r6cyf")
+theme_override_font_sizes/font_size = 61
+text = "\"LMB\" to strike"
+
+[node name="Label4" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.890088, 0, 0.0773994, 1)
+theme_override_fonts/font = ExtResource("3_r6cyf")
+theme_override_font_sizes/font_size = 61
+text = "\"Space\" to jump"
+
+[node name="Label2" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.890088, 0, 0.0773994, 1)
+theme_override_fonts/font = ExtResource("3_r6cyf")
+theme_override_font_sizes/font_size = 61
+text = "\"WASD\" to move"
+
+[node name="Label3" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.890088, 0, 0.0773994, 1)
+theme_override_fonts/font = ExtResource("3_r6cyf")
+theme_override_font_sizes/font_size = 61
+text = "\"ESC\" to quit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_0wpcn")
+volume_db = -6.682
+
+[connection signal="mouse_entered" from="VBoxContainer/StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

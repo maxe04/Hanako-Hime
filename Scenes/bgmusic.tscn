@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl6pp26ybkfko"]
+
+[ext_resource type="AudioStream" uid="uid://c6osy0h5ejoyy" path="res://Sounds/Naruto Soundtrack - Sarutobi [ ezmp3.cc ].mp3" id="1_0aojm"]
+[ext_resource type="Script" path="res://Scripts/bgmusic.gd" id="2_17rae"]
+[ext_resource type="PackedScene" uid="uid://cn567cm7ks8dl" path="res://Scenes/world.tscn" id="3_hjc0f"]
+
+[node name="bgmusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_0aojm")
+volume_db = -10.306
+parameters/looping = true
+script = ExtResource("2_17rae")
+world = ExtResource("3_hjc0f")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bfq7iq4u7qpv6"
+path="res://.godot/imported/Taking out a Sword Sound Effect [ ezmp3.cc ].mp3-1543978bb71efc4e904bd556ac323a5b.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Taking out a Sword Sound Effect [ ezmp3.cc ].mp3"
+dest_files=["res://.godot/imported/Taking out a Sword Sound Effect [ ezmp3.cc ].mp3-1543978bb71efc4e904bd556ac323a5b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

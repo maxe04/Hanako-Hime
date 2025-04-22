@@ -1,0 +1,183 @@
+[gd_scene load_steps=12 format=3 uid="uid://cxegbvk61m7ar"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_6ppf2"]
+[ext_resource type="Texture2D" uid="uid://bd7q1eanwe4mm" path="res://Assets/MidnightSlash/Run.png" id="1_od7e7"]
+[ext_resource type="AudioStream" uid="uid://h0euy8bhuq87" path="res://Sounds/steps.mp3" id="3_1suj5"]
+[ext_resource type="AudioStream" uid="uid://c6tidch306dl3" path="res://Sounds/scream.mp3" id="4_f4hvn"]
+[ext_resource type="AudioStream" uid="uid://bsxsj4s353kr0" path="res://Sounds/Blood Splatter Sound Effect [ ezmp3.cc ].mp3" id="5_edtvw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_60r4s"]
+
+[sub_resource type="Animation" id="Animation_hdbw5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_85h75"]
+resource_name = "death"
+step = 0.03
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("scream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("steps")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hurtbox:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("blood")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_f4jw3"]
+resource_name = "run"
+length = 1.15
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_egrej"]
+_data = {
+"RESET": SubResource("Animation_hdbw5"),
+"death": SubResource("Animation_85h75"),
+"run": SubResource("Animation_f4jw3")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qjfm7"]
+size = Vector3(1.3844, 2.20599, 1.26917)
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemy"]]
+collision_layer = 4
+script = ExtResource("1_6ppf2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_60r4s")
+
+[node name="Sprite3D" type="Sprite3D" parent="." groups=["enemy"]]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.0939, 0)
+visible = false
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_od7e7")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_egrej")
+}
+autoplay = "run"
+
+[node name="steps" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("3_1suj5")
+autoplay = true
+parameters/looping = true
+
+[node name="scream" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_f4hvn")
+
+[node name="hurtbox" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0266724, 1.07755, -0.0205688)
+shape = SubResource("BoxShape3D_qjfm7")
+
+[node name="blood" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_edtvw")
+volume_db = -4.156
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

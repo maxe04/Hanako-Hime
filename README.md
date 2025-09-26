@@ -6,14 +6,10 @@ A little game I made for a one-week project with the themes: 'Medieval' and 'Iso
 <h2>Description</h2>
 Princess Hanako is about to be forcibly married to a feudal prince. Refusing the marriage and defying her father, she decides to fight her way through the forest, where hundreds of guards wait to capture her.
 
-<h2>Languages and Libraries Used</h2>
+## Technologies Used
 
-- <b>GDScript</b>
-
-
-<h2>Environments Used</h2>
-
-- <b>Godot v4.3</b>
+- **Game Engine**: Godot
+- **Languages**: GDScript
 
 <h2>Walkthrough</h2>
 <p align="center">
